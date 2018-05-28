@@ -20,7 +20,7 @@
 	window.onload = function() {
 		// set up an observer for the title element
 		var target = document.querySelector('head > title');
-		var observer; 
+		var observer;
 		if (window.MutationObserver) {
 			observer = new window.WebKitMutationObserver(function(mutations) {
 				var newPage = window.location.pathname + window.location.hash;
@@ -28,7 +28,6 @@
 				  'page_title' : document.title,
 				  'page_path': newPage
 				});
-				gtag('event', 'xyz');
 			});
 		} else {
 			
@@ -38,7 +37,6 @@
 				  'page_title' : document.title,
 				  'page_path': newPage
 				});
-				gtag('event', 'xyz');
 			});
 		}
 		observer.observe(target, { subtree: true, characterData: true, childList: true });
