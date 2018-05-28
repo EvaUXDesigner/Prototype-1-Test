@@ -28,6 +28,7 @@
 				  'page_title' : document.title,
 				  'page_path': newPage
 				});
+				gtag('event', 'xyz');
 			});
 		} else {
 			
@@ -37,6 +38,7 @@
 				  'page_title' : document.title,
 				  'page_path': newPage
 				});
+				gtag('event', 'xyz');
 			});
 		}
 		observer.observe(target, { subtree: true, characterData: true, childList: true });
