@@ -22,7 +22,7 @@
 		var target = document.querySelector('head > title');
 		var observer;
 		if (window.MutationObserver) {
-			observer = new window.WebKitMutationObserver(function(mutations) {
+			observer = new window.MutationObserver(function(mutations) {
 				var newPage = window.location.pathname + window.location.hash;
 				gtag('config', 'UA-119552225-4', {
 				  'page_title' : document.title,
