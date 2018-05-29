@@ -20,24 +20,18 @@
 	window.onload = function() {
 		// set up an observer for the title element
 		var target = document.querySelector('head > title');
+		var mutationsHandler = function(mutations) {
+			var newPage = window.location.pathname + window.location.hash;
+			gtag('config', 'UA-119552225-4', {
+				'page_title' : document.title,
+				'page_path': newPage
+			});
+		});
 		var observer;
 		if (window.MutationObserver) {
-			observer = new window.MutationObserver(function(mutations) {
-				var newPage = window.location.pathname + window.location.hash;
-				gtag('config', 'UA-119552225-4', {
-				  'page_title' : document.title,
-				  'page_path': newPage
-				});
-			});
+			observer = new window.MutationObserver(mutationsHandler);
 		} else {
-			
-			observer = new window.WebKitMutationObserver(function(mutations) {
-				var newPage = window.location.pathname + window.location.hash;
-				gtag('config', 'UA-119552225-4', {
-				  'page_title' : document.title,
-				  'page_path': newPage
-				});
-			});
+			observer = new window.WebKitMutationObserver(mutationsHandler);
 		}
 		observer.observe(target, { subtree: true, characterData: true, childList: true });
 	};
