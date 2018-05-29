@@ -17,23 +17,18 @@
 
 	<!-- Tweak for Google Analytics to catch SPA navigation -->
 	<script>
+	var currentPage = '';
 	window.onload = function() {
-		// set up an observer for the title element
-		var target = document.querySelector('head > title');
-		var mutationsHandler = function(mutations) {
+		setInterval(function() {
+		    if (currentPage !== document.title) {
+			currentPage = document.title;
 			var newPage = window.location.pathname + window.location.hash;
 			gtag('config', 'UA-119552225-4', {
-				'page_title' : document.title,
+				'page_title' : currentPage,
 				'page_path': newPage
-			});
-		};
-		var observer;
-		if (window.MutationObserver) {
-			observer = new window.MutationObserver(mutationsHandler);
-		} else {
-			observer = new window.WebKitMutationObserver(mutationsHandler);
-		}
-		observer.observe(target, { subtree: true, characterData: true, childList: true });
+			});      
+		    }
+		}, 100);
 	};
 	</script>
 	<!-- End of tweak for Google Analytics to catch SPA navigation -->
